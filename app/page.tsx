@@ -1,10 +1,20 @@
+// app/page.tsx
 import SearchRepos from "@/components/SearchRepos";
+import { Suspense } from "react";
 
-export default function Home({ searchParams }: { searchParams: { username?: string } }) {
+interface Props {
+  searchParams?: { [key: string]: string | undefined };
+}
+
+export default async function Home({ searchParams }: Props) {
+  const username = searchParams?.username || "raulmarx";
+
   return (
     <main className="max-w-4xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-6 text-center">GitHub Repository Explorer</h1>
-      <SearchRepos initialUsername={searchParams.username || "raulmarx"} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SearchRepos initialUsername={username} />
+      </Suspense>
     </main>
   );
 }

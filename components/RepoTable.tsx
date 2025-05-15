@@ -6,9 +6,11 @@ interface Props {
   repos: GithubRepo[];
   onNext: () => void;
   onPrev: () => void;
+  disablePrev: boolean;
+  disableNext: boolean;
 }
 
-export function RepoTable({ repos, onNext, onPrev }: Props) {
+export function RepoTable({ repos, onNext, onPrev, disablePrev, disableNext }: Props) {
   return (
     <div className="space-y-4">
       <Table>
@@ -34,8 +36,8 @@ export function RepoTable({ repos, onNext, onPrev }: Props) {
         </TableBody>
       </Table>
       <div className="flex justify-between">
-        <Button variant="outline" onClick={onPrev}>Previous</Button>
-        <Button variant="outline" onClick={onNext}>Next</Button>
+        <Button variant="outline" onClick={onPrev} disabled={disablePrev}>Previous</Button>
+        <Button variant="outline" onClick={onNext} disabled={disableNext}>Next</Button>
       </div>
     </div>
   );
